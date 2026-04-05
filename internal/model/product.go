@@ -19,12 +19,6 @@ var (
 )
 
 func NewProduct(price float32, name string, description *string) (*Product, error) {
-	// if price <= 0 {
-	// 	return nil, ErrInvalidPrice
-	// }
-	// if len(name) < 3 {
-	// 	return nil, ErrInvalidName
-	// }
 
 	p := &Product{
 		ID:          uuid.NewString(),
