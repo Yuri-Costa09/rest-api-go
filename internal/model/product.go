@@ -35,12 +35,57 @@ func NewProduct(price float32, name string, description *string) (*Product, erro
 }
 
 func (p *Product) validate() error {
-	if p.Price <= 0 {
-		return ErrInvalidPrice
+
+	if err := validateName(p.Name); err != nil {
+		return err
 	}
-	if len(p.Name) < 3 {
+
+	if err := validatePrice(p.Price); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func validateName(name string) error {
+	if len(name) < 3 {
 		return ErrInvalidName
 	}
+
+	return nil
+}
+
+func validatePrice(price float32) error {
+	if price <= 0 {
+		return ErrInvalidPrice
+	}
+
+	return nil
+}
+
+func (p *Product) UpdateName(name string) error {
+	if err := validateName(name); err != nil {
+		return err
+	}
+
+	p.Name = name
+
+	return nil
+}
+
+func (p *Product) UpdatePrice(price float32) error {
+	if err := validatePrice(price); err != nil {
+		return err
+	}
+
+	p.Price = price
+
+	return nil
+}
+
+func (p *Product) UpdateDesc(desc *string) error {
+
+	p.Description = desc
 
 	return nil
 }
